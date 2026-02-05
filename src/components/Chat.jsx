@@ -146,7 +146,7 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
       color: '#fff',
       position: 'relative'
     }}>
-      {/* Header - FULLY FIXED */}
+      {/* Header - RESPONSIVE */}
       <div className="chat-header" style={{
         display: 'flex',
         alignItems: 'center',
@@ -157,10 +157,10 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
         minHeight: '64px',
         flexShrink: 0
       }}>
-        {/* Menu Button - with proper spacing */}
+        {/* Menu Button - ONLY ON MOBILE (hidden on desktop) */}
         <button 
           onClick={onBack} 
-          className="menu-button" 
+          className="menu-button-mobile" 
           style={{
             background: 'none',
             border: 'none',
@@ -178,11 +178,12 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
           <Menu size={24} />
         </button>
         
+        {/* Bot Icon */}
         <div style={{
           width: '40px',
           height: '40px',
           borderRadius: '50%',
-          backgroundColor: '#fff', 
+          backgroundColor: '#fff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -769,6 +770,20 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
         textarea:focus {
           outline: none;
           border-color: #fbbf24;
+        }
+
+        /* HIDE HAMBURGER MENU ON DESKTOP (screens > 768px) */
+        @media (min-width: 769px) {
+          .menu-button-mobile {
+            display: none !important;
+          }
+        }
+
+        /* SHOW HAMBURGER MENU ON MOBILE ONLY (screens <= 768px) */
+        @media (max-width: 768px) {
+          .menu-button-mobile {
+            display: flex !important;
+          }
         }
       `}</style>
     </div>
