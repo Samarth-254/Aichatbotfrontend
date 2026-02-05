@@ -94,7 +94,7 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -420,10 +420,10 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
             backgroundColor: '#0a0a0a',
             color: '#fff',
             width: '100%',
-            maxWidth: '600px',
-            maxHeight: '85vh',
-            borderRadius: '16px',
-            padding: '20px',
+            maxWidth: '480px',
+            maxHeight: '70vh',
+            borderRadius: '12px',
+            padding: '16px',
             overflowY: 'auto',
             position: 'relative',
             boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
@@ -433,32 +433,34 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
               onClick={() => setShowMatches(false)}
               style={{
                 position: 'absolute',
-                top: '16px',
-                right: '16px',
-                background: '#1a1a1a',
-                border: '1px solid #333',
-                borderRadius: '8px',
-                color: '#fff',
+                top: '12px',
+                right: '12px',
+                background: 'transparent',
+                border: 'none',
+                borderRadius: '6px',
+                color: '#888',
                 cursor: 'pointer',
-                padding: '8px',
+                padding: '6px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minWidth: '40px',
-                minHeight: '40px'
+                transition: 'color 0.2s'
               }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#fff'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#888'}
             >
-              <X size={20} />
+              <X size={18} />
             </button>
             
             <h2 style={{
               marginTop: 0,
-              marginBottom: '20px',
-              paddingBottom: '12px',
-              borderBottom: '1px solid #333',
-              color: '#fbbf24',
-              fontSize: '20px',
-              paddingRight: '50px'
+              marginBottom: '16px',
+              paddingBottom: '10px',
+              borderBottom: '1px solid #222',
+              color: '#fff',
+              fontSize: '17px',
+              fontWeight: '600',
+              paddingRight: '40px'
             }}>
               Matched Investors
             </h2>
@@ -466,31 +468,31 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
             <div className="investors-list" style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '12px'
+              gap: '10px'
             }}>
               {matchedInvestors.map((inv, idx) => (
                 <div key={idx} style={{
-                  backgroundColor: '#000',
-                  padding: '16px',
-                  borderRadius: '12px',
+                  backgroundColor: '#0f0f0f',
+                  padding: '12px',
+                  borderRadius: '8px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '12px',
-                  border: '1px solid #333'
+                  gap: '10px',
+                  border: '1px solid #222'
                 }}>
                   <div>
                     <h3 style={{
-                      margin: '0 0 6px 0',
+                      margin: '0 0 4px 0',
                       color: '#fff',
-                      fontSize: '16px',
+                      fontSize: '14px',
                       fontWeight: '600'
                     }}>
                       {inv.name}
                     </h3>
                     <p style={{
                       margin: 0,
-                      fontSize: '13px',
-                      color: '#aaa',
+                      fontSize: '12px',
+                      color: '#888',
                       lineHeight: '1.4'
                     }}>
                       {inv.sectors.join(', ')}
@@ -499,22 +501,33 @@ const Chat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated }) => {
                   <button 
                     onClick={() => setSelectedInvestor(inv)}
                     style={{
-                      backgroundColor: '#fbbf24',
-                      color: '#000',
-                      border: 'none',
-                      padding: '10px 16px',
-                      borderRadius: '8px',
+                      backgroundColor: '#1a1a1a',
+                      color: '#aaa',
+                      border: '1px solid #333',
+                      padding: '6px 12px',
+                      borderRadius: '6px',
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '8px',
-                      fontWeight: '600',
-                      fontSize: '14px',
-                      minHeight: '42px'
+                      gap: '6px',
+                      fontWeight: '500',
+                      fontSize: '12px',
+                      minHeight: '32px',
+                      transition: 'all 0.2s'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#252525';
+                      e.currentTarget.style.color = '#fff';
+                      e.currentTarget.style.borderColor = '#444';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#1a1a1a';
+                      e.currentTarget.style.color = '#aaa';
+                      e.currentTarget.style.borderColor = '#333';
                     }}
                   >
-                    <Eye size={18} /> View Details
+                    <Eye size={14} /> View Details
                   </button>
                 </div>
               ))}

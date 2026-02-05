@@ -93,7 +93,7 @@ const FinancialChat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated })
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/financial-chat`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/financial-chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -138,7 +138,7 @@ const FinancialChat = ({ onBack, chatId, setChatId, loadedChat, onChatCreated })
 
   const handleExport = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/export-excel`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/export-excel`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
